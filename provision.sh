@@ -9,6 +9,7 @@ fi
 
 REPO_URL="https://crashcube@bitbucket.org/crashcube/smqu-client.git"
 INSTALL_PATH="$HOME/smqdrv"
+USER="pi"
 
 sudo apt-get update
 sudo apt-get install -y curl git build-essential vim
@@ -31,25 +32,18 @@ cp -n .env.sample .env
 npm install
 
 # run service
-cat <<EOT > /etc/systemd/system/smqu-client.service
+sudo tee /etc/systemd/system/smqu-client.service <<EOT
 [Unit]
-Description=PM2 process manager
-Documentation=https://pm2.keymetrics.io/
+Description=SMQU Client
 After=network.target
 
 [Service]
-Type=forking
-User=pi
-LimitNOFILE=infinity
-LimitNPROC=infinity
-LimitCORE=infinity
-Environment=PATH=/usr/local/bin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
-Environment=PM2_HOME=/home/pi/.pm2
-PIDFile=/home/pi/.pm2/pm2.pid
-
-ExecStart=/usr/local/lib/node_modules/pm2/bin/pm2 resurrect
-ExecReload=/usr/local/lib/node_modules/pm2/bin/pm2 reload all
-ExecStop=/usr/local/lib/node_modules/pm2/bin/pm2 kill
+Type=simple
+User=${USER}
+WorkingDirectory=${INSTALL_PATH}
+ExecStart=/usr/local/bin/node driver.js
+Restart=always
+RestartSec=10
 
 [Install]
 WantedBy=multi-user.target
