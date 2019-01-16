@@ -11,7 +11,7 @@ const scanUrl    = process.env.SCAN_URL
 console.log('Started')
 
 const port = new SerialPort(serialPort, function (error) {
-  if (err) {
+  if (error) {
     return console.log('Error: ', error.message)
   }
 })
@@ -46,5 +46,3 @@ function wait() {
 }
 
 wait()
-
-console.log('Exit')
