@@ -2,15 +2,16 @@
 
 set -e
 
-if [ `whoami` = "root" ]; then
+USER=`whoami`
+INSTALL_PATH="$HOME/smqdrv"
+REPO_URL="https://crashcube@bitbucket.org/crashcube/smqu-client.git"
+
+if [ "$USER" = "root" ]; then
     echo 'You are root'
     exit 1
 fi
 
-REPO_URL="https://crashcube@bitbucket.org/crashcube/smqu-client.git"
-INSTALL_PATH="$HOME/smqdrv"
-USER="pi"
-
+# essentials
 sudo apt-get update
 sudo apt-get install -y curl git build-essential vim
 
@@ -28,6 +29,7 @@ test -d "$INSTALL_PATH/.git" || git clone $REPO_URL $INSTALL_PATH
 cd $INSTALL_PATH && git fetch origin && git reset --hard origin/master
 
 # install driver
+cd $INSTALL_PATH
 cp -n .env.sample .env
 npm install
 
