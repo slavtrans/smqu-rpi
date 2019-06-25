@@ -19,7 +19,7 @@ sudo apt-get install -y curl git build-essential vim
 if [ ! -f /usr/local/bin/node ]; then
     sudo wget https://nodejs.org/dist/v10.15.0/node-v10.15.0-linux-armv6l.tar.xz -O /tmp/node.tar.xz
     sudo tar --strip-components 1 -xf /tmp/node.tar.xz -C /usr/local
-    sudo rm /tmp/node.tar.gz
+    sudo rm /tmp/node.tar.xz
 fi
 
 # repo
