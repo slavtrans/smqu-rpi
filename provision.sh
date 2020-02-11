@@ -4,7 +4,7 @@ set -e
 
 USER=`whoami`
 INSTALL_PATH="$HOME/smqdrv"
-REPO_URL="https://crashcube@bitbucket.org/crashcube/smqu-client.git"
+REPO_URL="https://github.com/lysenkooo/smqu-rpi.git"
 
 if [ "$USER" = "root" ]; then
     echo 'You are root'
@@ -24,7 +24,7 @@ fi
 
 # repo
 mkdir -p "$HOME/.ssh"
-ssh-keyscan -t rsa bitbucket.org > "$HOME/.ssh/known_hosts"
+ssh-keyscan -t rsa github.com > "$HOME/.ssh/known_hosts"
 test -d "$INSTALL_PATH/.git" || git clone $REPO_URL $INSTALL_PATH
 cd $INSTALL_PATH && git fetch origin && git reset --hard origin/master
 
