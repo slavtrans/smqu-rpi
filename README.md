@@ -1,5 +1,5 @@
 # Install
 
 ```sh
-curl -sSL https://bitbucket.org/crashcube/smqu-client/raw/master/provision.sh | bash
+curl -sSL https://raw.githubusercontent.com/lysenkooo/smqu-rpi/master/provision.sh | bash
 ```
